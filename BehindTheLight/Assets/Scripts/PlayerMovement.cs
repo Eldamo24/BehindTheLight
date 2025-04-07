@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
 
     [SerializeField]
+    private Transform cameraTransform;
+
+    [SerializeField]
     private float movSpeed = 5f;
+    [SerializeField]
+    private float rotationSpeed = 5f;
 
     private Vector3 direction;
 
@@ -17,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        cameraTransform = Camera.main.transform;
     }
 
     private void Start()
@@ -28,8 +35,14 @@ public class PlayerMovement : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+        Vector3 forward = cameraTransform.forward;
+        forward.y = 0;
+        forward.Normalize();
 
-        direction = new Vector3(x,0,z);
+        Vector3 right = cameraTransform.right;
+        right.y = 0;
+        right.Normalize();
+        direction = forward * z + right * x;
 
         animator.SetFloat("xMov", x);
         animator.SetFloat("zMov", z);
@@ -40,9 +53,11 @@ public class PlayerMovement : MonoBehaviour
         if(direction.sqrMagnitude != 0)
         {
             Movement(direction);
+            Rotation();
         }
 
     }
+
 
     /// <summary>
     /// Function that manages simple player character movement
@@ -51,5 +66,22 @@ public class PlayerMovement : MonoBehaviour
     private void Movement(Vector3 dir)
     {
         rb.MovePosition(transform.position + movSpeed * Time.fixedDeltaTime * dir);
+    }
+
+    /// <summary>
+    /// Function that manages simple player character rotation using the camera.
+    /// </summary>
+    private void Rotation()
+    {
+        Vector3 lookDirection = cameraTransform.forward;
+        lookDirection.y = 0;
+        lookDirection.Normalize();
+
+        if (lookDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+            Quaternion smoothedRotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            rb.MoveRotation(smoothedRotation);
+        }
     }
 }
