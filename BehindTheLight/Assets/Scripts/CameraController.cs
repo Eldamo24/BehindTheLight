@@ -27,8 +27,11 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        CameraRotation();
-        InteractionDetect();
+        if (!GameManager.instance.IsPaused)
+        {
+            CameraRotation();
+            InteractionDetect();
+        }
     }
 
 
