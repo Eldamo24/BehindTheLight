@@ -33,29 +33,38 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        Vector3 forward = cameraTransform.forward;
-        forward.y = 0;
-        forward.Normalize();
+        if (!GameManager.instance.IsPaused)
+        {
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+            Vector3 forward = cameraTransform.forward;
+            forward.y = 0;
+            forward.Normalize();
 
-        Vector3 right = cameraTransform.right;
-        right.y = 0;
-        right.Normalize();
-        direction = forward * z + right * x;
+            Vector3 right = cameraTransform.right;
+            right.y = 0;
+            right.Normalize();
+            direction = forward * z + right * x;
 
-        animator.SetFloat("xMov", x);
-        animator.SetFloat("zMov", z);
+            animator.SetFloat("xMov", x);
+            animator.SetFloat("zMov", z);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.instance.SetPaused();
+        }
     }
 
     private void FixedUpdate()
     {
-        if(direction.sqrMagnitude != 0)
+        if (!GameManager.instance.IsPaused)
         {
-            Movement(direction);
-            Rotation();
+            if (direction.sqrMagnitude != 0)
+            {
+                Movement(direction);
+                Rotation();
+            }
         }
-
     }
 
 
