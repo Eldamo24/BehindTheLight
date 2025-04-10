@@ -7,7 +7,6 @@ public class TestKey : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        print("Agarraste la llave");
         Destroy(gameObject);
     }
 
