@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -799,8 +799,8 @@ GameObject:
   - component: {fileID: 477452194}
   - component: {fileID: 477452193}
   - component: {fileID: 477452192}
-  - component: {fileID: 477452191}
-  m_Layer: 0
+  - component: {fileID: 477452195}
+  m_Layer: 3
   m_Name: Button1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -823,20 +823,6 @@ Transform:
   - {fileID: 1034055594}
   m_Father: {fileID: 547727959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &477452191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477452189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a00ab79a361f6d419365a49e565f86f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 1
-  puzzleManager: {fileID: 1834722572}
 --- !u!65 &477452192
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -908,6 +894,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477452189}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &477452195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477452189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a00ab79a361f6d419365a49e565f86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  puzzleManager: {fileID: 1834722572}
+  onInteractMsg: Press Button
 --- !u!1 &547727958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1745,8 +1746,8 @@ GameObject:
   - component: {fileID: 817672040}
   - component: {fileID: 817672039}
   - component: {fileID: 817672038}
-  - component: {fileID: 817672037}
-  m_Layer: 0
+  - component: {fileID: 817672041}
+  m_Layer: 3
   m_Name: Button2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1769,20 +1770,6 @@ Transform:
   - {fileID: 1295923784}
   m_Father: {fileID: 547727959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &817672037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 817672035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a00ab79a361f6d419365a49e565f86f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 2
-  puzzleManager: {fileID: 1834722572}
 --- !u!65 &817672038
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1854,6 +1841,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817672035}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &817672041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817672035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a00ab79a361f6d419365a49e565f86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 2
+  puzzleManager: {fileID: 1834722572}
+  onInteractMsg: Press Button
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3168,8 +3170,8 @@ GameObject:
   - component: {fileID: 1635254734}
   - component: {fileID: 1635254733}
   - component: {fileID: 1635254732}
-  - component: {fileID: 1635254731}
-  m_Layer: 0
+  - component: {fileID: 1635254735}
+  m_Layer: 3
   m_Name: Button3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3192,20 +3194,6 @@ Transform:
   - {fileID: 1371247881}
   m_Father: {fileID: 547727959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1635254731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635254729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a00ab79a361f6d419365a49e565f86f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 3
-  puzzleManager: {fileID: 1834722572}
 --- !u!65 &1635254732
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3277,6 +3265,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635254729}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1635254735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635254729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a00ab79a361f6d419365a49e565f86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 3
+  puzzleManager: {fileID: 1834722572}
+  onInteractMsg: Press Button
 --- !u!1 &1661495571
 GameObject:
   m_ObjectHideFlags: 0

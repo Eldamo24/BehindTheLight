@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonPuzzle : MonoBehaviour
+public class ButtonPuzzle : MonoBehaviour, IInteractable
 {
     public int id = 0;
     [SerializeField] private SecondPuzzleLogic puzzleManager;
+    [SerializeField] private string onInteractMsg;
 
-    void OnMouseDown()
+    public string OnInteractMsg => onInteractMsg;
+
+    public void OnInteract()
     {
         if (puzzleManager != null)
         {
-             puzzleManager.OnButtonPressedSequence(id);
+            puzzleManager.OnButtonPressedSequence(id);
         }
     }
 }
