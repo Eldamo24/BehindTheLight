@@ -53,6 +53,10 @@ public class CameraController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }
 
+    /// <summary>
+    /// Function that detects if there are objects on our view thar are interactables.
+    /// </summary>
+
     private void InteractionDetect()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f)); 
@@ -62,16 +66,36 @@ public class CameraController : MonoBehaviour
             IInteractable interactObj = hit.collider.GetComponent<IInteractable>();
             if (interactObj != null)
             {
-                interactText.text = interactObj.OnInteractMsg;
-                if (Input.GetKeyDown(KeyCode.E))
+                if(hit.collider.gameObject.layer == LayerMask.NameToLayer("LighteableObjects"))
                 {
-                    interactObj.OnInteract();
+                    LightedObjects fade = hit.collider.GetComponent<LightedObjects>();
+                    if(fade != null && fade.IsVisible())
+                    {
+                        Interaction(interactObj);
+                    }
+                }
+                else
+                {
+                    Interaction(interactObj);
                 }
             }
         }
         else
         {
             interactText.text = "";
+        }
+    }
+
+    /// <summary>
+    /// Interact method. 
+    /// </summary>
+
+    private void Interaction(IInteractable interactObj)
+    {
+        interactText.text = interactObj.OnInteractMsg;
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            interactObj.OnInteract();
         }
     }
 }
