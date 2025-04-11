@@ -5,16 +5,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private Rigidbody rb;
+    [SerializeField] private Rigidbody rb;
 
-    [SerializeField]
-    private Transform cameraTransform;
+    [SerializeField] private Transform cameraTransform;
 
-    [SerializeField]
-    private float movSpeed = 5f;
-    [SerializeField]
-    private float rotationSpeed = 5f;
+    [SerializeField] private float movSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 5f;
 
     private Vector3 direction;
 
