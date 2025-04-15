@@ -56,5 +56,12 @@ public class LightedObjects : MonoBehaviour, IInteractable
     {
         print("Interactuaste");
     }
+
+    private void OnDestroy()
+    {
+        Color c = mat.color;
+        c.a = 0f;
+        mat.color = c;
+    }
 }
 
