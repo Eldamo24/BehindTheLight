@@ -1026,6 +1026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   puzzleManager: {fileID: 832345636}
+  onInteractMsg: 
 --- !u!65 &200489161
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1147,6 +1148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   puzzleManager: {fileID: 832345636}
+  onInteractMsg: 
 --- !u!65 &330159024
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3631,6 +3633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   puzzleManager: {fileID: 832345636}
+  onInteractMsg: 
 --- !u!65 &1999812232
 BoxCollider:
   m_ObjectHideFlags: 0
