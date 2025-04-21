@@ -95,6 +95,7 @@ public class CameraController : MonoBehaviour
         interactText.text = interactObj.OnInteractMsg;
         if (Input.GetKeyDown(KeyCode.E))
         {
+            interactText.text = "";
             interactObj.OnInteract();
         }
     }
