@@ -3,18 +3,33 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Enemy/States/Attack")]
 public class AttackState : EnemyState
 {
+    [SerializeField] private EnemyState chaseState;
+    private float attackCooldown = 2f;
+    private float attackRange = 3f;
+    private float timer;
+
     public override void Enter(EnemyStateMachine stateMachine)
     {
-        throw new System.NotImplementedException();
+        timer = 0f;
+        stateMachine.Agent.ResetPath();
     }
 
     public override void UpdateState(EnemyStateMachine stateMachine)
     {
-        throw new System.NotImplementedException();
+        float dist = Vector3.Distance(stateMachine.transform.position, stateMachine.Player.position);
+        if (dist > attackRange) 
+        {
+            stateMachine.ChangeState(chaseState);
+            return;
+        }
+        stateMachine.transform.LookAt(stateMachine.Player);
+        timer += Time.deltaTime;
+        if(timer >= attackCooldown)
+        {
+            timer = 0f;
+            Debug.Log("Attack");
+        }
     }
 
-    public override void Exit(EnemyStateMachine stateMachine)
-    {
-        throw new System.NotImplementedException();
-    }
+    public override void Exit(EnemyStateMachine stateMachine) { }
 }
