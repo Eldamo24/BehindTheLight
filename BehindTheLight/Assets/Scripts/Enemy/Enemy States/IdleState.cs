@@ -12,6 +12,7 @@ public class IdleState : EnemyState
     {
         stateMachine.Agent.ResetPath();
         stateMachine.IdleTimer = 0f;
+        stateMachine.Anim.SetBool("Running", false);
     }
 
 

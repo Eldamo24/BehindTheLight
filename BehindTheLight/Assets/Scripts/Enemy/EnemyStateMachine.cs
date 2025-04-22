@@ -7,6 +7,7 @@ public class EnemyStateMachine : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform player;
     [SerializeField] private Transform[] wayPoints;
+    [SerializeField] private Animator anim;
 
     private int patrolIndex;
     private float idleTimer;
@@ -16,6 +17,7 @@ public class EnemyStateMachine : MonoBehaviour
     public Transform Player { get => player; }
     public Transform[] WayPoints { get => wayPoints; }
     public int PatrolIndex { get => patrolIndex; set => patrolIndex = value; }
+    public Animator Anim { get => anim; }
 
     private void Start()
     {

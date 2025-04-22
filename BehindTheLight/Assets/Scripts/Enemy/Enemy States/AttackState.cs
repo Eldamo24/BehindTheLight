@@ -12,6 +12,7 @@ public class AttackState : EnemyState
     {
         timer = 0f;
         stateMachine.Agent.ResetPath();
+        stateMachine.Anim.SetTrigger("Attack");
     }
 
     public override void UpdateState(EnemyStateMachine stateMachine)

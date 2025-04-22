@@ -9,6 +9,7 @@ public class PatrolState : EnemyState
     public override void Enter(EnemyStateMachine stateMachine)
     {
         stateMachine.Agent.SetDestination(stateMachine.WayPoints[stateMachine.PatrolIndex].position);
+        stateMachine.Anim.SetBool("Running", true);
     }
 
     public override void UpdateState(EnemyStateMachine stateMachine)

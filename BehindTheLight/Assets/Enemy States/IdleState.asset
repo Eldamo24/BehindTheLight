@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d685d73f0d4b448bae3032d8bda4c6, type: 3}
+  m_Name: IdleState
+  m_EditorClassIdentifier: 
+  patrolState: {fileID: 11400000, guid: d63293a95c76bfb4ab3a3b2cad8d25a4, type: 2}
+  chaseState: {fileID: 11400000, guid: 6f30d5e006c0b444caf214d9d12b6fdd, type: 2}

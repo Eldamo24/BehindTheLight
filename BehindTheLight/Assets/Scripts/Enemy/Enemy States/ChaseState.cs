@@ -8,7 +8,10 @@ public class ChaseState : EnemyState
     private float attackRange = 3f;
     private float detectionRange = 15f;
 
-    public override void Enter(EnemyStateMachine stateMachine) { }
+    public override void Enter(EnemyStateMachine stateMachine) 
+    {
+        stateMachine.Anim.SetBool("Running", true);
+    }
 
     public override void UpdateState(EnemyStateMachine stateMachine)
     {
