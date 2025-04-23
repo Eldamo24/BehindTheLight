@@ -2,32 +2,30 @@ using UnityEngine;
 
 public class CocentricController : MonoBehaviour
 {
-   
-    [SerializeField]private CocentricRing ring1;
+    [SerializeField] private CocentricRing ring1;
     [SerializeField] private CocentricRing ring2;
     [SerializeField] private CocentricRing ring3;
 
-    public bool solvedPuzzle = false;
+    private Color gold = new Color(0.9f, 0.8f, 0.2f);
 
-    public void CheckSolution()
+    internal bool IsSolved { get; private set; }
+
+    internal void CheckSolution()
     {
-        if (ring1.correctPosition && ring2.correctPosition && ring3.correctPosition)
+        if (!IsSolved &&
+            ring1.IsCorrect && ring2.IsCorrect && ring3.IsCorrect)
         {
-            if (!solvedPuzzle)
-            {
-                solvedPuzzle = true;
-                Solved();
-            }
+            IsSolved = true;
+            OnSolved();
         }
     }
 
-    private void Solved()
+    private void OnSolved()
     {
-        Debug.Log("¡Cocentric ring solved!");
+        Debug.Log("¡Co­centric ring solved!");
 
-        if (ring1 != null) ring1.GetComponent<Renderer>().material.color = Color.yellow;
-        if (ring2 != null) ring2.GetComponent<Renderer>().material.color = Color.yellow;
-        if (ring3 != null) ring3.GetComponent<Renderer>().material.color = Color.yellow;
+        ring1.PaintSolved(gold);
+        ring2.PaintSolved(gold);
+        ring3.PaintSolved(gold);
     }
-
 }
