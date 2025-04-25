@@ -5,6 +5,7 @@ public class CocentricController : MonoBehaviour
     [SerializeField] private CocentricRing ring1;
     [SerializeField] private CocentricRing ring2;
     [SerializeField] private CocentricRing ring3;
+    [SerializeField] private Door doorToUnlock;
 
     private Color gold = new Color(0.9f, 0.8f, 0.2f);
 
@@ -27,5 +28,6 @@ public class CocentricController : MonoBehaviour
         ring1.PaintSolved(gold);
         ring2.PaintSolved(gold);
         ring3.PaintSolved(gold);
+        doorToUnlock.UnlockDoor();
     }
 }

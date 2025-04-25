@@ -12,8 +12,8 @@ public class LanternDirection : MonoBehaviour
     }
     private void Update()
     {
-        Vector3 lanternDirection = cam.transform.forward;
-        Quaternion desiredRotation = Quaternion.LookRotation(lanternDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
+        //Vector3 lanternDirection = cam.transform.forward;
+        //Quaternion desiredRotation = Quaternion.LookRotation(lanternDirection);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
     }
 }
