@@ -19905,6 +19905,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2332123480659120930, guid: 74452e2c455cc07418c3eb6e33ae1563, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 5232261672485609938, guid: 74452e2c455cc07418c3eb6e33ae1563, type: 3}
       propertyPath: player
       value: 
@@ -25101,18 +25105,6 @@ MonoBehaviour:
   lightedObject: {fileID: 0}
   lightsOn: 0
   lanternLight: {fileID: 356305918213057508}
---- !u!114 &4353005915202410467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9134823016616796924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 646dc98c75c7dcc47a745fb32aec6f1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7774666009983241495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25212,7 +25204,6 @@ GameObject:
   - component: {fileID: 97083240802710344}
   - component: {fileID: 8515072088833931315}
   - component: {fileID: 3918458975967980250}
-  - component: {fileID: 4353005915202410467}
   m_Layer: 0
   m_Name: Lantern
   m_TagString: Untagged
