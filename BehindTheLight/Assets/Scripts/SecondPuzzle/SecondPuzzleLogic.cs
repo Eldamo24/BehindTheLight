@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,79 +5,95 @@ using UnityEngine;
 public class SecondPuzzleLogic : MonoBehaviour
 {
     [SerializeField] private TextMeshPro displayText;
-    [SerializeField] private int numOfButtons = 3;    
 
-    private bool solvedPuzzle = false;
+    [SerializeField] private int numOfButtons = 3;
+    [SerializeField] private List<ButtonPuzzle> buttons;  
 
-    private int[] sequence;             
-    private int currentIndex = 0;
+    [SerializeField] private Color baseTextColor = Color.black;
+    [SerializeField] private Color okColor = Color.green;
+    [SerializeField] private Color completeColor = new Color(0.9f, 0.8f, 0.2f);
 
-    void Start()
-    {
-        RestartSequence();  
-    }
+    private int[] sequence;
+    private int currentIndex;
+    private bool solvedPuzzle;
 
-    /// <summary>
-    /// Generates a sequence with the number of buttons availables
-    /// </summary>
-    void RestartSequence()
-    {
-        sequence = new int[numOfButtons];
-        List<int> availableButtons = new List<int>();
-        for (int i = 1; i <= numOfButtons; i++)
-        {
-            availableButtons.Add(i);
-        }
-        for (int idx = 0; idx < numOfButtons; idx++)
-        {
-            int indiceAleatorio = Random.Range(0, availableButtons.Count);
-            sequence[idx] = availableButtons[indiceAleatorio];
-            availableButtons.RemoveAt(indiceAleatorio);
-        }
+    private void Start() => RestartSequence();
 
-        currentIndex = 0;
-        solvedPuzzle = false;
-        UpdateSequenceText();
-    }
-
-    /// <summary>
-    /// This function updates the sequence text on the panel
-    /// </summary>
-    void UpdateSequenceText()
-    {
-        string textSequence = string.Join("- ", sequence);
-        displayText.text = textSequence;
-    }
-
-
-    /// <summary>
-    /// Function that activates on pressed button
-    /// </summary>
-    /// <param name="idBoton">Id of pressed button</param>
-    public void OnButtonPressedSequence(int idBoton)
+    public void OnButtonPressedSequence(int idButton, ButtonPuzzle pressedButton)
     {
         if (solvedPuzzle) return;
 
-        if (sequence[currentIndex] == idBoton)
+        if (sequence[currentIndex] == idButton)
         {
+            pressedButton.SetColor(okColor);
             currentIndex++;
+
             if (currentIndex >= sequence.Length)
-            {
                 CompletedPuzzle();
-            }
+            else
+                HighlightProgress();
         }
         else
         {
-            // Wrong Button
-            Debug.Log("Wrong Button. Restarting sequence...");
             RestartSequence();
         }
     }
 
-    void CompletedPuzzle()
+    private void CompletedPuzzle()
     {
         solvedPuzzle = true;
+
+        displayText.text = string.Join("- ", sequence);
+
+        displayText.color = completeColor;
+
+        foreach (var btn in buttons)
+            btn.SetColor(completeColor);
+
         Debug.Log("¡Good Job!");
     }
 
+    private void RestartSequence()
+    {
+        /* Secuencia nueva */
+        sequence = GenerateSequence(numOfButtons);
+        currentIndex = 0;
+        solvedPuzzle = false;
+
+        /* Reset feedback visual */
+        displayText.color = baseTextColor;
+        foreach (var btn in buttons) btn.ResetColor();
+
+        UpdateSequenceText();
+    }
+
+    private void HighlightProgress()
+    {
+        var progress = new List<string>();
+        for (var i = 0; i < sequence.Length; i++)
+        {
+            string elem = sequence[i].ToString();
+            if (i < currentIndex) elem = $"<color=#{ColorUtility.ToHtmlStringRGB(okColor)}>{elem}</color>";
+            progress.Add(elem);
+        }
+        displayText.text = string.Join("- ", progress);
+    }
+
+    private int[] GenerateSequence(int n)
+    {
+        var result = new int[n];
+        var pool = new List<int>();
+        for (int i = 1; i <= n; i++) pool.Add(i);
+
+        for (int idx = 0; idx < n; idx++)
+        {
+            int index = Random.Range(0, pool.Count);
+            result[idx] = pool[index];
+            pool.RemoveAt(index);
+        }
+        return result;
+    }
+
+    private void UpdateSequenceText() =>
+        displayText.text = string.Join("- ", sequence);
 }

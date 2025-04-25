@@ -1,33 +1,46 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Renderer))]
 public class CocentricRing : MonoBehaviour, IInteractable
 {
     [SerializeField] private float rotationStep = 30f;
     [SerializeField] private float correctAngle = 0f;
     [SerializeField] private CocentricController controller;
-
     [SerializeField] private string onInteractMsg;
 
-    public string OnInteractMsg => onInteractMsg;
+    private bool isCorrect;
+    private Color baseColor;
+    private Renderer rend;
 
-    public bool correctPosition = false;
+    public string OnInteractMsg => onInteractMsg;
+    internal bool IsCorrect => isCorrect;
+
+    private void Awake()
+    {
+        rend = GetComponent<Renderer>();
+        baseColor = rend.material.color;
+    }
+
 
     public void OnInteract()
     {
-        if (!controller.solvedPuzzle)
+        if (!controller.IsSolved)
         {
             transform.Rotate(0f, rotationStep, 0f);
             CheckAlignment();
-            if (controller != null) controller.CheckSolution();
+            controller.CheckSolution();
         }
     }
 
-    public void CheckAlignment()
+    private void CheckAlignment()
     {
         float angleY = transform.localEulerAngles.y;
         float dif = Mathf.Abs(Mathf.DeltaAngle(angleY, correctAngle));
-        correctPosition = (dif < 0.1f);
-        GetComponent<Renderer>().material.color = correctPosition ? Color.green : Color.gray;
+
+        isCorrect = dif < 0.1f;
+        rend.material.color = isCorrect ? Color.green : baseColor;
     }
 
+    internal void PaintSolved(Color solvedColor) =>
+        rend.material.color = solvedColor;
 }
