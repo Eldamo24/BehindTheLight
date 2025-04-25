@@ -10,6 +10,7 @@ public class Door : MonoBehaviour, IInteractable
     private Transform doorPivot;
     private AudioSource audioSource;
 
+    private bool canBeOpen;
     private bool isOpen;
 
     private string onInteractMsg;
@@ -22,8 +23,23 @@ public class Door : MonoBehaviour, IInteractable
         doorPivot = transform.parent;
         speed = 100f;
         isOpen = false;
+        canBeOpen = false;
+        if (!canBeOpen)
+        {
+            onInteractMsg = "Door Locked";
+        }
+        else
+        {
+            if (!isOpen)
+            {
+                onInteractMsg = "Open Door";
+            }
+            else
+            {
+                onInteractMsg = "Close Door";
+            }
+        }
         angle = transform.eulerAngles.y;
-        onInteractMsg = "Open door";
     }
 
     // Update is called once per frame
@@ -37,21 +53,30 @@ public class Door : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        if (isOpen == false)
+        if(canBeOpen)
         {
-            angle = finalAngle;
-            direction = Vector3.up;
-            isOpen = true;
-            onInteractMsg = "Close door";
-            audioSource.Play();
+            if (isOpen == false)
+            {
+                angle = finalAngle;
+                direction = Vector3.up;
+                isOpen = true;
+                onInteractMsg = "Close door";
+                audioSource.Play();
+            }
+            else if (isOpen == true)
+            {
+                angle = startAngle;
+                direction = Vector3.down;
+                isOpen = false;
+                onInteractMsg = "Open door";
+                audioSource.Play();
+            }
         }
-        else if (isOpen == true)
-        {
-            angle = startAngle;
-            direction = Vector3.down;
-            isOpen = false;
-            onInteractMsg = "Open door";
-            audioSource.Play();
-        }
+    }
+
+    public void UnlockDoor()
+    {
+        canBeOpen = true;
+        onInteractMsg = "Open Door";
     }
 }

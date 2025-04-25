@@ -5,6 +5,7 @@ using UnityEngine;
 public class SecondPuzzleLogic : MonoBehaviour
 {
     [SerializeField] private TextMeshPro displayText;
+    [SerializeField] private Door doorToUnlock;
 
     [SerializeField] private int numOfButtons = 3;
     [SerializeField] private List<ButtonPuzzle> buttons;  
@@ -42,6 +43,7 @@ public class SecondPuzzleLogic : MonoBehaviour
     private void CompletedPuzzle()
     {
         solvedPuzzle = true;
+        doorToUnlock.UnlockDoor();
 
         displayText.text = string.Join("- ", sequence);
 
@@ -62,6 +64,9 @@ public class SecondPuzzleLogic : MonoBehaviour
 
         /* Reset feedback visual */
         displayText.color = baseTextColor;
+        Color c = displayText.color;
+        c.a = 0f;
+        displayText.color = c;
         foreach (var btn in buttons) btn.ResetColor();
 
         UpdateSequenceText();
