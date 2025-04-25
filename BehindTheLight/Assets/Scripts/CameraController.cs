@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private LayerMask interactLayer;
     private float interactDistance = 3f;
     [SerializeField] private TMP_Text interactText;
+    [SerializeField] private LightController lightController;
 
 
 
@@ -37,7 +38,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = new Vector3(playerPos.position.x, playerPos.position.y +yOffset, playerPos.position.z);
+        transform.position = new Vector3(playerPos.position.x, playerPos.position.y + yOffset, playerPos.position.z);
     }
 
     /// <summary>
@@ -68,10 +69,13 @@ public class CameraController : MonoBehaviour
             {
                 if(hit.collider.gameObject.layer == LayerMask.NameToLayer("LighteableObjects"))
                 {
-                    LightedObjects fade = hit.collider.GetComponent<LightedObjects>();
-                    if(fade != null && fade.IsVisible())
+                    if (lightController.LightsOn)
                     {
-                        Interaction(interactObj);
+                        LightedObjects fade = hit.collider.GetComponent<LightedObjects>();
+                        if (fade != null && fade.IsVisible())
+                        {
+                            Interaction(interactObj);
+                        }
                     }
                 }
                 else

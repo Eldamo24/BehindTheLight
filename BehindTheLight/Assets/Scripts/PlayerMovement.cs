@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float movSpeed = 5f;
     [SerializeField] private float rotationSpeed = 5f;
+
+    [SerializeField] private LightController lightController;
 
     private Vector3 direction;
 
@@ -46,6 +45,10 @@ public class PlayerMovement : MonoBehaviour
 
             animator.SetFloat("xMov", x);
             animator.SetFloat("zMov", z);
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                lightController.LightsOn = !lightController.LightsOn;
+            }
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -60,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
             if (direction.sqrMagnitude != 0)
             {
                 Movement(direction);
-                Rotation();
             }
+            Rotation();
         }
     }
 

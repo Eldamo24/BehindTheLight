@@ -6,11 +6,28 @@ public class LightController : MonoBehaviour
     private float distance = 5f;
     [SerializeField] private GameObject lightedObject;
     private GameObject lastLightedObject;
+    [SerializeField] private bool lightsOn;
+    [SerializeField] private GameObject lanternLight;
 
+    public bool LightsOn { get => lightsOn; set => lightsOn = value; }
+
+    private void Start()
+    {
+        lightsOn = false;
+    }
 
     void Update()
     {
-        DetectLighteableObjects();
+        if (lightsOn)
+        {
+            lanternLight.SetActive(true);
+            DetectLighteableObjects();
+        }
+        else
+        {
+            lanternLight.SetActive(false);
+            RemoveLightedObject();
+        }
     }
 
     /// <summary>
@@ -46,8 +63,12 @@ public class LightController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    void RemoveLightedObject()
     {
-        Debug.DrawRay(transform.position, transform.forward, Color.red);
+        if(!lightsOn && lastLightedObject != null)
+        {
+            lastLightedObject.GetComponent<LightedObjects>().StartFadeOut();
+            lastLightedObject = null;
+        }
     }
 }
