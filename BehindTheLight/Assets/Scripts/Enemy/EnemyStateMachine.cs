@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyStateMachine : MonoBehaviour
 {
     [SerializeField] private EnemyState currentState;
+    [SerializeField] private IdleState idleState;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform player;
     [SerializeField] private Transform[] wayPoints;
@@ -24,9 +26,17 @@ public class EnemyStateMachine : MonoBehaviour
         currentState?.Enter(this);
     }
 
+    private void OnEnable()
+    {
+        currentState = idleState;
+    }
+
     private void Update()
     {
-        currentState?.UpdateState(this);
+        if (!GameManager.instance.IsPaused)
+        {
+            currentState?.UpdateState(this);
+        }
     }
 
     public void ChangeState(EnemyState newState)
@@ -34,5 +44,13 @@ public class EnemyStateMachine : MonoBehaviour
         currentState?.Exit(this);
         currentState = newState;
         currentState?.Enter(this);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }

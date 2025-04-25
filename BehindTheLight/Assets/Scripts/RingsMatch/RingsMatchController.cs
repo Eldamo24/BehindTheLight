@@ -4,12 +4,31 @@ public class PuzzleRingsMatchController : MonoBehaviour
 {
     [SerializeField] private Transform[] refRings;
     [SerializeField] private RingRotator[] playerRings;
+    [SerializeField] private Door doorToUnlock;
+    [SerializeField] private GameObject enemy;
+    private bool completed = false;
+    [SerializeField] private LightController lightController;
 
     private float[] targetAngles;
 
     private void Start()
     {
         GenerateReferenceAngles();
+    }
+
+    private void Update()
+    {
+        if (completed)
+        {
+            if (lightController.LightsOn)
+            {
+                enemy.SetActive(true);
+            }
+            else
+            {
+                enemy.SetActive(false);
+            }
+        }
     }
 
     private void GenerateReferenceAngles()
@@ -67,5 +86,7 @@ public class PuzzleRingsMatchController : MonoBehaviour
             if (rend != null)
                 rend.material.color = Color.yellow;
         }
+        doorToUnlock.UnlockDoor();
+        completed = true;
     }
 }

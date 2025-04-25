@@ -35,8 +35,9 @@ public class LightController : MonoBehaviour
     /// </summary>
     private void DetectLighteableObjects()
     {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.forward, out hit, distance, lighteableObjectsMask))
+        if(Physics.Raycast(ray, out hit, distance, lighteableObjectsMask))
         {
             lightedObject = hit.collider.gameObject;
             if(lightedObject != lastLightedObject)

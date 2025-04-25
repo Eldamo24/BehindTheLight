@@ -25,6 +25,16 @@ public class GameManager : MonoBehaviour
     public void SetPaused()
     {
         isPaused = !isPaused;
+        if (isPaused)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         GameObject.FindObjectOfType<MainMenuController>().OnPause();
     }
 
