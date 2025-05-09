@@ -15,6 +15,8 @@ public class CameraController : MonoBehaviour
     private float interactDistance = 3f;
     [SerializeField] private TMP_Text interactText;
     [SerializeField] private LightController lightController;
+    [SerializeField] private int bounceRemain;
+    private MirrorReflect mReflect;
 
 
 
@@ -80,6 +82,11 @@ public class CameraController : MonoBehaviour
                 }
                 else
                 {
+                    if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Mirror"))
+                    {
+                        mReflect = hit.collider.gameObject.GetComponent<MirrorReflect>();
+                        mReflect.ReflectLight(ray.direction, hit.point, bounceRemain);
+                    }
                     Interaction(interactObj);
                 }
             }
@@ -87,6 +94,11 @@ public class CameraController : MonoBehaviour
         else
         {
             interactText.text = "";
+            if(mReflect != null)
+            {
+                mReflect.DisableReflection();
+                mReflect = null;
+            }
         }
     }
 
