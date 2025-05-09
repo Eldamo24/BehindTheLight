@@ -1,12 +1,13 @@
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.ProBuilder;
+
 
 public class MirrorReflect : MonoBehaviour
 {
     [SerializeField] private GameObject mirrorLight;
     [SerializeField] private LightController lightController;
     private float lightOffset = 0.05f;
+
+    public GameObject MirrorLight { get => mirrorLight; set => mirrorLight = value; }
 
     public void ReflectLight(Vector3 incomingDir, Vector3 hitPoint, int bounceRemain)
     {
@@ -39,7 +40,12 @@ public class MirrorReflect : MonoBehaviour
 
     public void DisableReflection()
     {
-        if (mirrorLight != null)
-            mirrorLight.SetActive(false);
+        MirrorReflect[] mReflects = FindObjectsOfType<MirrorReflect>();
+        foreach (MirrorReflect mReflect in mReflects)
+        {
+            if(mReflect.mirrorLight != null)
+                mReflect.mirrorLight.SetActive(false);
+        }
     }
+
 }
