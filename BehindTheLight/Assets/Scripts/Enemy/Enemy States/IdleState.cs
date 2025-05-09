@@ -24,7 +24,7 @@ public class IdleState : EnemyState
             stateMachine.ChangeState(chaseState);
             return;
         }
-        if (stateMachine.IdleTimer <= idleDuration)
+        if (stateMachine.IdleTimer >= idleDuration)
         {
             stateMachine.ChangeState(patrolState);
         }
