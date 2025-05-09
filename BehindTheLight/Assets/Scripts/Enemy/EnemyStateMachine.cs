@@ -45,12 +45,4 @@ public class EnemyStateMachine : MonoBehaviour
         currentState = newState;
         currentState?.Enter(this);
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-    }
 }
