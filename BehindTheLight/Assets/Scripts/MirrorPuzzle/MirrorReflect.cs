@@ -9,30 +9,48 @@ public class MirrorReflect : MonoBehaviour
 
     public GameObject MirrorLight { get => mirrorLight; set => mirrorLight = value; }
 
+    private MirrorPuzzleManager puzzleManager;
+
+    public bool IsLitThisFrame { get; set; } 
+
+    public void SetPuzzleManager(MirrorPuzzleManager m) => puzzleManager = m;
+
     public void ReflectLight(Vector3 incomingDir, Vector3 hitPoint, int bounceRemain)
     {
-        if (bounceRemain <= 0) return;
-        if (lightController.LightsOn)
+        if (!lightController.LightsOn || bounceRemain <= 0) return;
+
+        IsLitThisFrame = true;
+        puzzleManager.NotifyMirrorLit(this);
+        bounceRemain--;
+
+        Vector3 normalMirror = transform.forward;
+        Vector3 reflectDir = Vector3.Reflect(incomingDir, normalMirror);
+
+        if (mirrorLight)
         {
-            Vector3 normalMirror = transform.forward;
-            Vector3 reflectDirection = Vector3.Reflect(incomingDir, normalMirror);
-            if (mirrorLight != null)
+            mirrorLight.SetActive(true);
+            mirrorLight.transform.position = hitPoint + normalMirror * lightOffset;
+            mirrorLight.transform.rotation = Quaternion.LookRotation(reflectDir);
+        }
+
+        if (Physics.Raycast(hitPoint + normalMirror * 0.01f,
+                            reflectDir,
+                            out RaycastHit hit,
+                            100f))
+        {
+            Debug.DrawRay(hitPoint, reflectDir * hit.distance, Color.red, Time.deltaTime);
+
+            if (hit.collider.TryGetComponent(out MirrorReflect nextMirror))
             {
-                mirrorLight.SetActive(true);
-                mirrorLight.transform.position = hitPoint + normalMirror * lightOffset;
-                mirrorLight.transform.rotation = Quaternion.LookRotation(reflectDirection);
+                nextMirror.ReflectLight(reflectDir, hit.point, bounceRemain);
             }
-            if (Physics.Raycast(hitPoint + normalMirror * 0.01f, reflectDirection, out RaycastHit hit, 100f))
+            else
             {
-                Debug.DrawRay(hitPoint, reflectDirection * hit.distance, Color.red);
-                MirrorReflect nextMirror = hit.collider.GetComponent<MirrorReflect>();
-                if (nextMirror != null)
+                Door doorHit = hit.collider.GetComponentInParent<Door>();
+
+                if (doorHit != null)
                 {
-                    nextMirror.ReflectLight(reflectDirection, hit.point, bounceRemain - 1);
-                }
-                else if (hit.collider.CompareTag("Door") && bounceRemain <= 0)
-                {
-                    print("Unlocked door");
+                    puzzleManager.TryUnlockDoor();
                 }
             }
         }
