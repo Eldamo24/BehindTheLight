@@ -19,6 +19,6 @@ public class ButtonsFX : MonoBehaviour
 
     public void OnMouseExit()
     {
-        buttonText.color = Color.red;
+        buttonText.color = Color.gray;
     }
 }
