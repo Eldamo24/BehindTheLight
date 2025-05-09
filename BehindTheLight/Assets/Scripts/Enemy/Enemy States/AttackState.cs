@@ -5,7 +5,7 @@ public class AttackState : EnemyState
 {
     [SerializeField] private EnemyState chaseState;
     private float attackCooldown = 2f;
-    private float attackRange = 3f;
+    private float attackRange = 1f;
     private float timer;
 
     public override void Enter(EnemyStateMachine stateMachine)
