@@ -27624,6 +27624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mirrorLight: {fileID: 1033867319}
+  lightController: {fileID: 3918458975967980250}
 --- !u!1001 &1197264176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30432,6 +30433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mirrorLight: {fileID: 1449666175}
+  lightController: {fileID: 3918458975967980250}
 --- !u!114 &1472510386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40106,6 +40108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mirrorLight: {fileID: 1882909338}
+  lightController: {fileID: 3918458975967980250}
 --- !u!114 &2017561902
 MonoBehaviour:
   m_ObjectHideFlags: 0
