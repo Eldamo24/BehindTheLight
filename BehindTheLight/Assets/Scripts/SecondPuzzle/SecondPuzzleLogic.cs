@@ -1,53 +1,54 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SecondPuzzleLogic : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro displayText;
-    [SerializeField] private Door doorToUnlock;
-
-    [SerializeField] private int numOfButtons = 3;
-    [SerializeField] private List<ButtonPuzzle> buttons;  
-
-    [SerializeField] private Color baseTextColor = Color.black;
+    [SerializeField] private List<Image> sequenceSlots;
+    [SerializeField] private List<Sprite> numberSprites;
+    [SerializeField] private Color baseSlotColor = Color.white;
     [SerializeField] private Color okColor = Color.green;
     [SerializeField] private Color completeColor = new Color(0.9f, 0.8f, 0.2f);
 
-    private int[] sequence;
-    private int currentIndex;
-    private bool solvedPuzzle;
+    [SerializeField] private int numOfButtons = 3;
+    [SerializeField] private List<ButtonPuzzle> buttons;
+    [SerializeField] private Door doorToUnlock;
 
-    private void Start() => RestartSequence();
+    int[] sequence;
+    int currentIndex;
+    bool solvedPuzzle;
 
-    public void OnButtonPressedSequence(int idButton, ButtonPuzzle pressedButton)
+    void Start() => RestartSequence();
+
+    public bool OnButtonPressedSequence(int idButton, ButtonPuzzle pressedButton)
     {
-        if (solvedPuzzle) return;
+        if (solvedPuzzle) return true;
 
         if (sequence[currentIndex] == idButton)
         {
             pressedButton.SetColor(okColor);
             currentIndex++;
+            HighlightProgress();
 
             if (currentIndex >= sequence.Length)
                 CompletedPuzzle();
-            else
-                HighlightProgress();
+
+            return true;
         }
-        else
-        {
-            RestartSequence();
-        }
+
+        RestartSequence();
+        return false; 
     }
 
-    private void CompletedPuzzle()
+    void CompletedPuzzle()
     {
         solvedPuzzle = true;
         doorToUnlock.UnlockDoor();
 
-        displayText.text = string.Join("- ", sequence);
-
-        displayText.color = completeColor;
+        for (int i = 0; i < sequenceSlots.Count; i++)
+        {
+            sequenceSlots[i].color = completeColor;
+        }
 
         foreach (var btn in buttons)
             btn.SetColor(completeColor);
@@ -55,36 +56,34 @@ public class SecondPuzzleLogic : MonoBehaviour
         Debug.Log("¡Good Job!");
     }
 
-    private void RestartSequence()
+    void RestartSequence()
     {
-        /* Secuencia nueva */
         sequence = GenerateSequence(numOfButtons);
         currentIndex = 0;
         solvedPuzzle = false;
 
-        /* Reset feedback visual */
-        displayText.color = baseTextColor;
-        Color c = displayText.color;
-        c.a = 0f;
-        displayText.color = c;
-        foreach (var btn in buttons) btn.ResetColor();
-
-        UpdateSequenceText();
-    }
-
-    private void HighlightProgress()
-    {
-        var progress = new List<string>();
-        for (var i = 0; i < sequence.Length; i++)
+        for (int i = 0; i < sequenceSlots.Count; i++)
         {
-            string elem = sequence[i].ToString();
-            if (i < currentIndex) elem = $"<color=#{ColorUtility.ToHtmlStringRGB(okColor)}>{elem}</color>";
-            progress.Add(elem);
+            sequenceSlots[i].sprite = numberSprites[sequence[i] - 1]; // sprites 0-based
+            sequenceSlots[i].color = baseSlotColor;
         }
-        displayText.text = string.Join("- ", progress);
+
+        foreach (var btn in buttons)
+        {
+            btn.ResetColor();
+            btn.ResetPosition();
+        }
     }
 
-    private int[] GenerateSequence(int n)
+    void HighlightProgress()
+    {
+        for (int i = 0; i < sequenceSlots.Count; i++)
+        {
+            sequenceSlots[i].color = (i < currentIndex) ? okColor : baseSlotColor;
+        }
+    }
+
+    static int[] GenerateSequence(int n)
     {
         var result = new int[n];
         var pool = new List<int>();
@@ -92,13 +91,10 @@ public class SecondPuzzleLogic : MonoBehaviour
 
         for (int idx = 0; idx < n; idx++)
         {
-            int index = Random.Range(0, pool.Count);
-            result[idx] = pool[index];
-            pool.RemoveAt(index);
+            int k = Random.Range(0, pool.Count);
+            result[idx] = pool[k];
+            pool.RemoveAt(k);
         }
         return result;
     }
-
-    private void UpdateSequenceText() =>
-        displayText.text = string.Join("- ", sequence);
 }
