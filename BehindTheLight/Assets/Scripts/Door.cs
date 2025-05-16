@@ -13,6 +13,7 @@ public class Door : MonoBehaviour, IInteractable
     private bool canBeOpen;
     private bool isOpen;
 
+    public bool doorWasOpen = false;
     private string onInteractMsg;
 
     public string OnInteractMsg => onInteractMsg;
@@ -55,6 +56,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         if(canBeOpen)
         {
+            doorWasOpen = true;
             if (isOpen == false)
             {
                 angle = finalAngle;
