@@ -147,7 +147,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!114 &16332315 stripped
 MonoBehaviour:
@@ -721,10 +720,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: gramophone
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 56fa2348b2fa2f84684f2bae765acbb8, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56fa2348b2fa2f84684f2bae765acbb8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 957127366}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56fa2348b2fa2f84684f2bae765acbb8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 957127368}
   m_SourcePrefab: {fileID: 100100000, guid: 56fa2348b2fa2f84684f2bae765acbb8, type: 3}
 --- !u!43 &88882438
 Mesh:
@@ -5702,7 +5711,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!4 &516174968 stripped
 Transform:
@@ -7994,7 +8002,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!1 &704297181 stripped
 GameObject:
@@ -8037,7 +8044,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 9630d0c8802a8ab41865c350d3205ef4, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!4 &705743130 stripped
 Transform:
@@ -19408,7 +19414,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!4 &744634599 stripped
 Transform:
@@ -24718,6 +24723,47 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927335219}
   m_CullTransparentMesh: 1
+--- !u!1 &957127365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 56fa2348b2fa2f84684f2bae765acbb8, type: 3}
+  m_PrefabInstance: {fileID: 82679871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &957127366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957127365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df99b0aa30572fc4ba68b1af23b4f580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 758e5c60564bb294b849f8866259a847, type: 3}
+  maxDistance: 10
+  onInteractMsg: Press 'E' to play
+--- !u!65 &957127368
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957127365}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &959343136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24856,7 +24902,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!1001 &977267206
 PrefabInstance:
@@ -26911,6 +26956,145 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa799fbe38215db499d82518519b1b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1110615570 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 17b3b8552eede7249bcac7ccf591fa5b, type: 3}
+  m_PrefabInstance: {fileID: 1747500897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1110615573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110615570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3be60a7404e95741a374471a0b66fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 1110314477}
+  loopClip: {fileID: 8300000, guid: 5aaf7abcd505a224da3e2b1546e5a246, type: 3}
+  maxDistance: 140
+  delaySeconds: 5
+  onInteractMsg: 
+--- !u!82 &1110615574
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110615570}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!65 &1110615575
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110615570}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.37316066, y: 0.19672431, z: 0.3744314}
+  m_Center: {x: -0.018896552, y: 0.094759144, z: -0.009805963}
 --- !u!4 &1121543387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4117054678719624, guid: 5ca4a76b446086a44847679204ffa344, type: 3}
@@ -27691,7 +27875,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!1 &1204673009
 GameObject:
@@ -27945,7 +28128,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!1001 &1231182756
 PrefabInstance:
@@ -28751,7 +28933,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e378e7f1643f22b47bdd466171a11b4b, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!64 &1328076858
 MeshCollider:
@@ -30515,6 +30696,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1590361228}
     m_Modifications:
+    - target: {fileID: 243673462608934220, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 253497511074776550, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.2
@@ -30551,10 +30736,38 @@ PrefabInstance:
       propertyPath: buttons.Array.data[2]
       value: 
       objectReference: {fileID: 1509128839}
+    - target: {fileID: 1479169837601494034, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2211158923211132128, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ec00d16a47c30bf4c9058477ad4a2de1, type: 2}
+    - target: {fileID: 2932662117297178512, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932662117297178512, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932662117297178512, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965114717192313739, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965114717192313739, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965114717192313739, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3188736137398771410, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
       propertyPath: m_Name
       value: PuzzleSequece
@@ -32060,7 +32273,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!1001 &1579690574
 PrefabInstance:
@@ -36328,10 +36540,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: phone
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 17b3b8552eede7249bcac7ccf591fa5b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 17b3b8552eede7249bcac7ccf591fa5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1110615575}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 17b3b8552eede7249bcac7ccf591fa5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1110615574}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 17b3b8552eede7249bcac7ccf591fa5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1110615573}
   m_SourcePrefab: {fileID: 100100000, guid: 17b3b8552eede7249bcac7ccf591fa5b, type: 3}
 --- !u!1 &1751000885
 GameObject:
@@ -38154,7 +38379,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!1001 &1924672798
 PrefabInstance:
@@ -38833,7 +39057,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 7bf82494de35d76448a46cea814e8288, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!64 &1993230978
 MeshCollider:
@@ -39038,7 +39261,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!1 &2006412125
 GameObject:
@@ -41679,7 +41901,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!1 &2121397102 stripped
 GameObject:
@@ -41732,7 +41953,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: e976e81884c1a5f47be05925d0ae21af, type: 2}
   textObj: {fileID: 0}
-  imgObj: {fileID: 0}
   onInteractMsg: 
 --- !u!4 &2128265032 stripped
 Transform:
