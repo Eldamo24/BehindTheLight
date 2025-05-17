@@ -30743,9 +30743,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2211158923211132128, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2211158923211132128, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ec00d16a47c30bf4c9058477ad4a2de1, type: 2}
+      objectReference: {fileID: 2100000, guid: 9ff2e80dbd4dec4409cfa878ef98a4ba, type: 2}
     - target: {fileID: 2932662117297178512, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -30775,9 +30779,13 @@ PrefabInstance:
       value: PuzzleSequece
       objectReference: {fileID: 0}
     - target: {fileID: 3219391020683857932, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219391020683857932, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ec00d16a47c30bf4c9058477ad4a2de1, type: 2}
+      objectReference: {fileID: 2100000, guid: 626a41e819c2d0540b4a16cb094ba0a0, type: 2}
     - target: {fileID: 3328718755503745316, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.23
@@ -30895,9 +30903,13 @@ PrefabInstance:
       value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 6991391927336269693, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6991391927336269693, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ec00d16a47c30bf4c9058477ad4a2de1, type: 2}
+      objectReference: {fileID: 2100000, guid: 7fcfac62b5d07884ca0987363723305b, type: 2}
     - target: {fileID: 7713440810070477852, guid: e335eaebd03008e43a0aa6d931a17e6a, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.2
