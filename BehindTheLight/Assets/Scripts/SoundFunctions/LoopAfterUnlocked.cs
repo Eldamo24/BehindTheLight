@@ -47,6 +47,7 @@ public class LoopAfterUnlocked : MonoBehaviour, IInteractable
         source.Play();
         loopPlaying = true;
         delayRoutine = null;
+        gameObject.layer = 3;
     }
 
     void StopLoop()
@@ -54,6 +55,8 @@ public class LoopAfterUnlocked : MonoBehaviour, IInteractable
         if (source.isPlaying) source.Stop();
         loopPlaying = false;
         alarmSilenced = true;
+        gameObject.layer = 0;
+        
     }
 
     public void OnInteract() => StopLoop();

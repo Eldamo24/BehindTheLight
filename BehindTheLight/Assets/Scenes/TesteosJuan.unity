@@ -26977,7 +26977,7 @@ MonoBehaviour:
   loopClip: {fileID: 8300000, guid: 5aaf7abcd505a224da3e2b1546e5a246, type: 3}
   maxDistance: 140
   delaySeconds: 5
-  onInteractMsg: 
+  onInteractMsg: E to stop
 --- !u!82 &1110615574
 AudioSource:
   m_ObjectHideFlags: 0
@@ -26990,7 +26990,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -27034,7 +27034,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -36604,7 +36604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 17b3b8552eede7249bcac7ccf591fa5b, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42558,6 +42558,10 @@ MonoBehaviour:
   lightedObject: {fileID: 0}
   lightsOn: 0
   lanternLight: {fileID: 356305918213057508}
+  verticalRayCount: 5
+  horizontalRayCount: 5
+  coneAngle: 20
+  showRays: 1
 --- !u!1001 &5309589810812360576
 PrefabInstance:
   m_ObjectHideFlags: 0

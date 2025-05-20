@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
 public class LightController : MonoBehaviour
 {
     [SerializeField] private LayerMask lighteableObjectsMask;
@@ -8,6 +11,13 @@ public class LightController : MonoBehaviour
     private GameObject lastLightedObject;
     [SerializeField] private bool lightsOn;
     [SerializeField] private GameObject lanternLight;
+
+    //Correccion de linterna
+    [SerializeField] private int verticalRayCount = 5;
+    [SerializeField] private int horizontalRayCount = 5;
+    [SerializeField] private float coneAngle = 20f;
+    [SerializeField] private bool showRays = true;
+    private HashSet<GameObject> lastLightedObjects = new HashSet<GameObject>();
 
     public bool LightsOn { get => lightsOn; set => lightsOn = value; }
 
@@ -35,33 +45,51 @@ public class LightController : MonoBehaviour
     /// </summary>
     private void DetectLighteableObjects()
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, distance, lighteableObjectsMask))
+        Vector3 origin = Camera.main.transform.position;
+        Vector3 forward = Camera.main.transform.forward;
+
+        HashSet<GameObject> currentLightedObjects = new HashSet<GameObject>();
+        float verticalStep = coneAngle / Mathf.Max(verticalRayCount, -1, 1);
+        float horizontalStep = coneAngle / Mathf.Max(horizontalRayCount, -1, 1);
+        
+        for(int i = 0; i < verticalRayCount; i++)
         {
-            lightedObject = hit.collider.gameObject;
-            if(lightedObject != lastLightedObject)
+            float verticalAngle = -coneAngle / 2 + verticalStep * i;
+            for(int j = 0; j<horizontalRayCount; j++)
             {
-                if(lastLightedObject != null)
+                float horizontalAngle = -coneAngle / 2 + horizontalStep * j;
+                Quaternion rotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
+                Vector3 direction = rotation * forward;
+                if(Physics.Raycast(origin, direction, out RaycastHit hit, distance, lighteableObjectsMask))
                 {
-                    lastLightedObject.GetComponent<LightedObjects>().StartFadeOut();
+                    GameObject hitObject = hit.collider.gameObject;
+                    currentLightedObjects.Add(hitObject);
+                    if (showRays)
+                        Debug.DrawRay(origin, direction * hit.distance, Color.green, 0.1f);
                 }
-                LightedObjects fadeObject = lightedObject.GetComponent<LightedObjects>();
-                if(fadeObject != null)
+                else if (showRays)
                 {
-                    fadeObject.StartFadeIn();
+                    Debug.DrawRay(origin, direction * distance, Color.red, 0.1f);
                 }
-                lastLightedObject = lightedObject;
+                
             }
         }
-        else
+        foreach(var obj in currentLightedObjects)
         {
-            if(lastLightedObject != null)
+            if (!lastLightedObjects.Contains(obj))
             {
-                lastLightedObject.GetComponent<LightedObjects>().StartFadeOut();
-                lastLightedObject = null;
+                obj.GetComponent<LightedObjects>()?.StartFadeIn();
             }
         }
+
+        foreach(var obj in lastLightedObjects)
+        {
+            if (!currentLightedObjects.Contains(obj))
+            {
+                obj.GetComponent<LightedObjects>()?.StartFadeOut();
+            }
+        }
+        lastLightedObjects = currentLightedObjects;
     }
 
     void RemoveLightedObject()
@@ -71,5 +99,39 @@ public class LightController : MonoBehaviour
             lastLightedObject.GetComponent<LightedObjects>().StartFadeOut();
             lastLightedObject = null;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+
+        if (!Application.isPlaying) return;
+
+        Vector3 origin = Camera.main.transform.position;
+        Vector3 forward = Camera.main.transform.forward;
+
+        float verticalStep = coneAngle / Mathf.Max(verticalRayCount - 1, 1);
+        float horizontalStep = coneAngle / Mathf.Max(horizontalRayCount - 1, 1);
+
+        for (int y = 0; y < verticalRayCount; y++)
+        {
+            float verticalAngle = -coneAngle / 2 + verticalStep * y;
+
+            for (int x = 0; x < horizontalRayCount; x++)
+            {
+                float horizontalAngle = -coneAngle / 2 + horizontalStep * x;
+
+                Quaternion rotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
+                Vector3 direction = rotation * forward;
+
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawRay(origin, direction * distance);
+            }
+        }
+
+
+        Gizmos.color = new Color(0, 1, 1, 0.2f);
+        Vector3 coneEnd = origin + forward * distance;
+        Gizmos.DrawWireSphere(coneEnd, Mathf.Tan(coneAngle * Mathf.Deg2Rad / 2f) * distance);
+
     }
 }
