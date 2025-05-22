@@ -34,7 +34,7 @@ public class SecondPuzzleLogic : MonoBehaviour
         if (sequence[currentIndex] == idButton) 
         {
             currentIndex++;
-            HighlightProgress();
+            //HighlightProgress();
 
             if (currentIndex >= sequence.Length)
                 CompletePuzzle();
@@ -51,8 +51,8 @@ public class SecondPuzzleLogic : MonoBehaviour
         puzzleSolved = true;
         doorToUnlock.UnlockDoor();
 
-        foreach (var r in slotRenderers) r.material.color = completeColor;
-        foreach (var b in buttons) b.SetColor(completeColor);
+       // foreach (var r in slotRenderers) r.material.color = completeColor;
+       // foreach (var b in buttons) b.SetColor(completeColor);
 
         Debug.Log("¡Puzzle completado!");
     }
@@ -72,16 +72,16 @@ public class SecondPuzzleLogic : MonoBehaviour
                 continue;
             }
 
-            Material mat = slotRenderers[i].material;
-            mat.mainTexture = numberTextures[idx];
-            mat.color = baseSlotColor;
+            //Material mat = slotRenderers[i].material;
+            //mat.mainTexture = numberTextures[idx];
+            //mat.color = baseSlotColor;
 
-            slotRenderers[i].GetComponent<LightedObjects>()?.StartFadeOut();
+            //slotRenderers[i].GetComponent<LightedObjects>()?.StartFadeOut();
         }
 
         foreach (var b in buttons)
         {
-            b.ResetColor();
+           // b.ResetColor();
             b.ResetPosition();
         }
     }

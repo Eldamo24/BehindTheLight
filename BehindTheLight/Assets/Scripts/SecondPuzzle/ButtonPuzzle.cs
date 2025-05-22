@@ -35,8 +35,8 @@ public class ButtonPuzzle : MonoBehaviour, IInteractable
         StartCoroutine(AnimatePress(stayDown));
     }
 
-    public void SetColor(Color c) => _rend.material.color = c;
-    public void ResetColor() => _rend.material.color = _baseColor;
+    //public void SetColor(Color c) => _rend.material.color = c;
+    //public void ResetColor() => _rend.material.color = _baseColor;
 
     public void ResetPosition()
     {
