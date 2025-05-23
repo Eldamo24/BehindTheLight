@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class SecondPuzzleLogic : MonoBehaviour
@@ -15,11 +16,9 @@ public class SecondPuzzleLogic : MonoBehaviour
 
 
     [SerializeField] private List<Texture2D> numberTextures;
+    [SerializeField] private ChangeAlbedoOnTrigger changeAlbedoOnTrigger;
+    [SerializeField] private ActivateObjectsAndPlaySound activateObjectsAndPlaySound;
 
-
-    [SerializeField] private Color baseSlotColor = Color.white;
-    [SerializeField] private Color okColor = Color.green;
-    [SerializeField] private Color completeColor = new Color(0.9f, 0.8f, 0.2f);
 
     int[] sequence;          
     int currentIndex;       
@@ -34,8 +33,6 @@ public class SecondPuzzleLogic : MonoBehaviour
         if (sequence[currentIndex] == idButton) 
         {
             currentIndex++;
-            //HighlightProgress();
-
             if (currentIndex >= sequence.Length)
                 CompletePuzzle();
 
@@ -50,13 +47,10 @@ public class SecondPuzzleLogic : MonoBehaviour
     {
         puzzleSolved = true;
         doorToUnlock.UnlockDoor();
-
-       // foreach (var r in slotRenderers) r.material.color = completeColor;
-       // foreach (var b in buttons) b.SetColor(completeColor);
-
+        changeAlbedoOnTrigger.ChangeAlbedoOnActivate();
+        activateObjectsAndPlaySound.DoActivationTrigger();
         Debug.Log("¡Puzzle completado!");
     }
-
     void RestartSequence()
     {
         sequence = GenerateSequence(numOfButtons);
@@ -65,37 +59,32 @@ public class SecondPuzzleLogic : MonoBehaviour
 
         for (int i = 0; i < slotRenderers.Count && i < sequence.Length; i++)
         {
-            int idx = sequence[i] - 1;
-            if (idx >= numberTextures.Count)
+            int textureIndex = sequence[i] - 1;
+            if (textureIndex < 0 || textureIndex >= numberTextures.Count)
             {
-                Debug.LogError($"numberTextures no tiene entrada para el número {sequence[i]} (indice {idx}).");
+                Debug.LogError($"Número {sequence[i]} fuera de rango en numberTextures.");
                 continue;
             }
 
-            //Material mat = slotRenderers[i].material;
-            //mat.mainTexture = numberTextures[idx];
-            //mat.color = baseSlotColor;
+            var rend = slotRenderers[i];
+            var newMat = new Material(rend.material);
+            newMat.mainTexture = numberTextures[textureIndex];
+            rend.material = newMat;
 
-            //slotRenderers[i].GetComponent<LightedObjects>()?.StartFadeOut();
+            var lightComp = rend.GetComponent<LightedObjects>();
+            if (lightComp != null)
+            {
+                var fi = typeof(LightedObjects)
+                    .GetField("mat", BindingFlags.NonPublic | BindingFlags.Instance);
+                if (fi != null)
+                    fi.SetValue(lightComp, newMat);
+            }
         }
 
         foreach (var b in buttons)
-        {
-           // b.ResetColor();
             b.ResetPosition();
-        }
-    }
 
-    void HighlightProgress()
-    {
-        for (int i = 0; i < slotRenderers.Count; i++)
-        {
-            Color target = (i < currentIndex) ? okColor : baseSlotColor;
-            slotRenderers[i].material.color = target;
-
-            if (i < currentIndex)
-                slotRenderers[i].GetComponent<LightedObjects>()?.StartFadeIn();
-        }
+        Debug.Log("Nueva secuencia: " + string.Join(",", sequence));
     }
 
     static int[] GenerateSequence(int n)
