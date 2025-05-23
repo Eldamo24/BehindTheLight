@@ -25,18 +25,13 @@ public class ButtonPuzzle : MonoBehaviour, IInteractable
         _lockedDown = false;
     }
 
-    // === llamado por PlayerInteractor ===
     public void OnInteract()
     {
         if (puzzleManager == null) return;
 
-        // Disparo la secuencia; me dirá si soy el botón correcto
         bool stayDown = puzzleManager.OnButtonPressedSequence(id, this);
         StartCoroutine(AnimatePress(stayDown));
     }
-
-    //public void SetColor(Color c) => _rend.material.color = c;
-    //public void ResetColor() => _rend.material.color = _baseColor;
 
     public void ResetPosition()
     {

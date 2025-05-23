@@ -5,12 +5,13 @@ public class CocentricRing : MonoBehaviour, IInteractable
 {
     [SerializeField] private float rotationStep = 30f;
     [SerializeField] private float correctAngle = 0f;
+
+    [SerializeField] private Transform pivotPoint;
     [SerializeField] private CocentricController controller;
     [SerializeField] private string onInteractMsg;
 
-    private bool isCorrect;
-    private Color baseColor;
     private Renderer rend;
+    private bool isCorrect;
 
     public string OnInteractMsg => onInteractMsg;
     internal bool IsCorrect => isCorrect;
@@ -18,29 +19,34 @@ public class CocentricRing : MonoBehaviour, IInteractable
     private void Awake()
     {
         rend = GetComponent<Renderer>();
-        baseColor = rend.material.color;
-    }
+        if (pivotPoint == null)
+        {
+            pivotPoint = transform.parent;
+            if (pivotPoint == null)
+                Debug.LogError($"{name}: no encontré pivotPoint ni parent para usar.");
+            else
+                Debug.LogWarning($"{name}: pivotPoint no asignado, usando parent '{pivotPoint.name}'.");
+        }
 
+        if (controller == null)
+            Debug.LogError($"{name}: asigna CocentricController en el Inspector.");
+    }
 
     public void OnInteract()
     {
-        if (!controller.IsSolved)
-        {
-            transform.Rotate(0f, rotationStep, 0f);
-            CheckAlignment();
-            controller.CheckSolution();
-        }
+        if (controller == null || controller.IsSolved) return;
+
+        pivotPoint.Rotate(0f, rotationStep, 0f, Space.Self);
+
+        float angleY = pivotPoint.localEulerAngles.y;
+        float diff = Mathf.Abs(Mathf.DeltaAngle(angleY, correctAngle));
+        isCorrect = diff < 0.1f;
+
+        controller.CheckSolution();
     }
 
-    private void CheckAlignment()
+    internal void PaintSolved(Color solvedColor)
     {
-        float angleY = transform.localEulerAngles.y;
-        float dif = Mathf.Abs(Mathf.DeltaAngle(angleY, correctAngle));
-
-        isCorrect = dif < 0.1f;
-        rend.material.color = isCorrect ? Color.green : baseColor;
-    }
-
-    internal void PaintSolved(Color solvedColor) =>
         rend.material.color = solvedColor;
+    }
 }

@@ -8,20 +8,20 @@ public class PlaySoundOnInteract : MonoBehaviour, IInteractable
     [SerializeField] private string onInteractMsg;
     public string OnInteractMsg => onInteractMsg;
 
-    AudioSource _src;
+    AudioSource source;
 
     void Awake()
     {
-        _src = gameObject.AddComponent<AudioSource>();
-        _src.playOnAwake = false;
-        _src.spatialBlend = 1f;
-        _src.maxDistance = maxDistance;
-        _src.rolloffMode = AudioRolloffMode.Linear;
+        source = gameObject.AddComponent<AudioSource>();
+        source.playOnAwake = false;
+        source.spatialBlend = 1f;
+        source.maxDistance = maxDistance;
+        source.rolloffMode = AudioRolloffMode.Linear;
     }
 
     public void OnInteract()
     {
         if (clip == null) return;
-        _src.PlayOneShot(clip);
+        source.PlayOneShot(clip);
     }
 }
